@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/logo.png" type="png">
+    <title>Celikstagram</title>
+    <link rel="stylesheet" href="/css/index/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/post.css">
+</head>
+<body>
+    <div class="container">
+        <%- include("partials/_nav") %>
+
+        <main>
+            <div class="contents">
+                <div class="storys">
+                    <div class="circle" style="background: url(<%=user.profile_photo%>) no-repeat center center; background-size: 70%;" ></div>
+                </div>
+
+                <div class="posts">
+                    <%- include("partials/_post") %>
+                    <%- include("partials/_post") %>
+                    <%- include("partials/_post") %>
+                    <%- include("partials/_post") %>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<nav>
+    <div class="celikstagram">
+        <img src="/img/wcelikstagram.png" alt="Celikstagram">
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li>
+                <a href="/" class="<%= link === 'index' && 'link'%>" >
+                    <div class="icon"><ion-icon name="home-outline"></ion-icon></div>
+                    <div class="text">Anasayfa</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/" class="<%= link === 'search' && 'link'%>">
+                    <div class="icon"><ion-icon name="search-outline"></ion-icon></div>
+                    <div class="text">Ara</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/" class="<%= link === 'messages' && 'link'%>">
+                    <div class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></div>
+                    <div class="text">Mesajlar</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="/" class="<%= link === 'profile' && 'link'%>">
+                    <div class="profile"><img src=<%= user.profile_photo %> alt=""></div>
+                    <div class="text">Profil</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</nav>
