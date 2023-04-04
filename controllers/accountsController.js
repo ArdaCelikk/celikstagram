@@ -1,6 +1,35 @@
 const User = require("../models").users
+const Reset = require("../models").resetpassword
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const nodemailer = require("nodemailer")
+
+
+
+
+function generateRandomNumber() {
+    const min = 1000;
+    const max = 9999;
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+
+
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'nissanskylinegtr34rb26280hp@gmail.com',
+      pass: 'ldtmvbxkgctkghoo'
+    }
+  });
+
+
+
+
+
+
+
 const registerUser = async (req,res)=>{
     try {
         const {username,email,password,fullname} = req.body
@@ -88,6 +117,53 @@ const getRegisterPage = (req,res)=>{
     res.render("register")
 }
 
+const getResetPasswordPage = (req,res)=>{
+    res.render("resetpassword")
+}
 
 
-module.exports = {getLoginPage , getRegisterPage,registerUser ,loginUser}
+
+
+const resetPasswordSendCode = async (req,res)=>{
+    try {
+        let check = await User.findOne({where:{email: req.body.email}})
+        let code = generateRandomNumber()
+        let checkEmail = await Reset.findOne({where:{email: req.body.email}})
+        if(checkEmail){
+            Reset.destroy({where:{email:req.body.email}})
+        }
+        let checkCode = await Reset.findOne({where:{code:code}})
+        if(checkCode){
+            code = generateRandomNumber()
+        }
+        if(check.username){
+            let bilgiler = {
+                from: "nissanskylinegtr34rb26280hp@gmail.com",
+                to: req.body.email,
+                subject: "Celikstagram | Şifremi Unuttum",
+                text: "Kodunuz : " + code 
+            }
+            await Reset.create({email:req.body.email,code})
+            res.status(200).json({
+                succeded:true,
+                message: "Bu Mail Sitemize Kayıtlı İse Mailiniz Gönderilmiştir. Gelen Kutunuzu Kontrol Ediniz."
+            })
+            transporter.sendMail(bilgiler, function (error, info){console.log('Eposta gönderildi ' + info.response)})
+        }
+    } catch (error) {
+        res.status(500).json({
+            succeded:false,
+            error: error.message
+        })
+    }
+}
+
+
+module.exports = {
+    getLoginPage,
+    getRegisterPage,
+    registerUser,
+    loginUser,
+    getResetPasswordPage,
+    resetPasswordSendCode
+}

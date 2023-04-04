@@ -1,6 +1,7 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
+const middlewares= require("./middlewares/authmiddleware")
 // const userRoute = require("./routes/userRoute")
 const pageRoute = require("./routes/pageRoutes")
 const accountsRoute = require("./routes/accountsRoutes")
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // ROUTES
 // app.use("/users",userRoute)
+app.use("*",middlewares.checkUser)
 app.use("/",pageRoute)
 app.use("/accounts",accountsRoute)
 
