@@ -17,7 +17,7 @@
         <main>
             <div class="profileInformations">
                 <div class="profilePhoto" style="background: url('<%=user.profile_photo%>');    background-size: cover; background-position: center center;">
-                    <!-- <img src="<%=user.profile_photo%>" aria-label="Profil Fotoğrafı" alt=""> -->
+                    <div class="filter"><ion-icon name="camera-reverse-outline"></ion-icon></div>
                 </div>
 
                 <div class="userInformation">
@@ -27,9 +27,12 @@
                         <svg aria-label="Seçenekler" class="x1lliihq x1n2onr6" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Seçenekler</title><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
                     </div>
                     <div class="follow">
-                        <span><span class="number">1</span> Gönderi</span>
+                        <span><span class="number"><%=posts.length%></span> Gönderi</span>
                         <span><span class="number"><%=user.followers.length%></span> Takipçi</span>
                         <span><span class="number"><%=user.following.length%></span> Takip</span>
+                    </div>
+                    <div class="addPhoto">
+                        <button class="btnSharePhoto">Fotoğraf Yükle</button>
                     </div>
                 </div>
             </div>
@@ -52,7 +55,8 @@
                         </div>
                     </div>
 
-                    <div class="post-container">
+                    <div class="post-container <% if(posts[0]){%> loadpost <%}%>">
+                        <%if(!posts[0]){%>
                         <div class="no-post">
                             <div class="image">
                             </div>
@@ -60,11 +64,36 @@
                             <span>Paylaştığın fotoğraflar profilinde gözükür.</span>
                             <span class="btnSharePhoto" id="shareFirstPhoto">İlk fotoğrafını Paylaş</span>
                         </div>
+                        <%}else{%>
+                            <%for(post of posts){%>
+                                <div class="user-post" style="background: url('<%=post.url%>') no-repeat; background-size: cover; background-position: center center;">
+                                    <div class="filter">
+                                        <ion-icon name="heart-outline"></ion-icon> <%= JSON.parse(post.likes).length%>
+                                    </div>
+                                </div>
+                            <%}%>
+                        <%}%>
+
                     </div>
             </div>
         </main>
     </div>
 
+
+<div class="ppChange-container">
+    <div class="closer"><ion-icon id="changeProfileCloser" name="close-outline"></ion-icon></div>
+    <div class="boxContainer">
+        <div class="box">
+            <div class="header">
+                Profil Fotoğrafını Değiştir
+            </div>
+            <div class="main2">
+                <label for="file-profilephoto">Fotoğraf Yükle</label>
+                <input type="file" name="" id="file-profilephoto">
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="uploadPhotoContainer">
     <div class="closer">

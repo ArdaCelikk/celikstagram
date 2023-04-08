@@ -19,15 +19,12 @@ fileInput.addEventListener('change', async () => {
     main.appendChild(submit)
     submit.addEventListener("click", async ()=>{
         formData.append('description', textArea.value);
-        const response = await fetch('/profile/uploadphoto', {
+        fetch('/profile/uploadphoto', {
           method: 'POST',
           body: formData
-        })
-        let data = await response.json()
-        if(data){
-            window.location.reload()
-            window.location.href= "/profile"
-        }
+        }).then(setTimeout(() => {
+            window.location.href = "/profile"
+        }, 200))
   })
 });
 
@@ -38,7 +35,7 @@ let btnSharePhoto = document.querySelector(".btnSharePhoto")
 
 
 sharePostCloser.addEventListener("click",()=>{
-    window.location.reload()
+    window.location.href = "/profile"
 })
 
 btnSharePhoto.addEventListener("click",()=>{
@@ -48,4 +45,30 @@ btnSharePhoto.addEventListener("click",()=>{
 
 
 
+let profilephoto = document.getElementById("file-profilephoto")
 
+profilephoto.addEventListener("change", async ()=>{
+    const profilephotoFile = profilephoto.files[0];
+    const formData2 = new FormData();
+    formData2.append('profile_photo', profilephotoFile);
+    fetch('/profile/changeprofilephoto', {
+        method: 'POST',
+        body: formData2
+    }).then(setTimeout(() => {
+        window.location.href = "/profile"
+    }, 200))
+    
+
+})
+
+
+let profilePhoto = document.querySelector(".profilePhoto")
+let ppChange_container = document.querySelector(".ppChange-container")
+let changeProfileCloser = document.getElementById("changeProfileCloser")
+profilePhoto.addEventListener("click",()=>{
+    ppChange_container.style.display = "flex"
+})
+
+changeProfileCloser.addEventListener("click",()=>{
+    ppChange_container.style.display = "none"
+})

@@ -17,8 +17,8 @@ const checkUser = async (req, res, next) => {
           profile_photo: user.profile_photo,
           username: user.username,
           fullname: user.fullname,
-          followers: user.followers,
-          following: user.following
+          followers: JSON.parse(user.followers),
+          following: JSON.parse(user.following)
         };
         next();
       }
