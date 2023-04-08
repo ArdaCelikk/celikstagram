@@ -24,6 +24,7 @@
     --blue2:#0095f6;
     --orange:#ff6302;
     --bordercolor: #262626;
+    --gray2: #363636;
 }
 
 .container{
@@ -210,4 +211,96 @@ main{
 .post{
     height: 200px;
     background-color: red;
+}
+
+.uploadPhotoContainer{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.uploadPhotoContainer .closer{
+    width: 100%;
+    height: 100px;
+    text-align: end;
+    padding:10px 20px;
+    font-size: 2em;
+    color: var(--white);
+}
+
+.uploadPhotoContainer .closer ion-icon{
+    cursor: pointer;
+}
+
+.uploadPhotoBox{
+    width: 700px;
+    height: 80vh;
+    border-radius: 15px;
+    background-color: var(--bordercolor);
+    overflow: hidden;
+}
+
+.uploadPhotoBox .header{
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    color: white;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--gray2);
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    color: var(--white);
+}
+
+.main input{
+    display: none;
+}
+
+.main label{
+    padding: 8px 30px;
+    background-color: var(--blue2);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.main textarea{
+    width: 60%;
+    resize: none;
+    height: 200px;
+    outline: none;
+    background-color: var(--bordercolor);
+    border: none;
+    color: white;
+    border: 1px solid var(--gray2);
+    border-radius: 15px;
+    text-indent: 0.5rem;
+    padding: 20px;
+}
+
+.main input[type="submit"]{
+    display: block;
+    background-color: var(--blue2);
+    border: none;
+    color: white;
+    width: 60%;
+    outline: none;
+    padding: 9px 30px;
+    border-radius: 10px;
+    cursor: pointer;
 }

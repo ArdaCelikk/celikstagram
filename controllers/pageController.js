@@ -1,13 +1,14 @@
-const getIndexPage = (req,res)=>{
+const Posts = require("../models").posts
+
+const getIndexPage =async (req,res)=>{
+    const posts = await Posts.findAll()
+    // console.log(posts);
     res.render("index",{
-        link:"index"
+        link:"index",
+        posts
     })
 }
 
-const getProfilePage = (req,res)=>{
-    res.render("profile",{
-        link:"profile"
-    })
-}
 
-module.exports = {getIndexPage, getProfilePage}
+
+module.exports = {getIndexPage}

@@ -35,7 +35,6 @@
 .post .main{
     width: 100%;
     height: 400px;
-    background-color: #cac;
     border-radius: 5px;
 }
 
@@ -70,5 +69,6 @@
     width: 100%;
     text-indent: 0.3rem;
     color: white;
+    font-size: 0.8rem;
     padding-top: 15px;
 }

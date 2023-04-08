@@ -21,10 +21,32 @@
                 </div>
 
                 <div class="posts">
-                    <%- include("partials/_post") %>
-                    <%- include("partials/_post") %>
-                    <%- include("partials/_post") %>
-                    <%- include("partials/_post") %>
+
+                    <%
+                        for(post of posts){ %>
+                        <div class="post">
+                            <div class="header">
+                                <div class="profile_photo"  style="background: url('<%=post.profile_photo%>');    background-size: cover; background-position: center center;">
+                                </div>
+                                <div class="username"><%=post.username%></div>
+                            </div>
+                            <div class="main" style="background: url('<%=post.url%>');background-size: cover;background-repeat: no-repeat;background-position: center center;">
+                            </div>
+                        
+                            <div class="footer">
+                                <div class="like">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                    <span>0</span>
+                                </div>
+                                <ion-icon name="bookmark-outline"></ion-icon>
+                            </div>
+                            <div class="comment">
+                                <%=post.description%>
+                            </div>
+                        </div>
+                    <%}%>
+
+
                 </div>
             </div>
         </main>
