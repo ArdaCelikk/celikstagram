@@ -61,6 +61,7 @@
     font-weight: 800;
     padding: 10px;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 .resetpassword-container .header .text{
@@ -126,13 +127,22 @@ form input[type="submit"]{
     padding: 20px;
     font-weight: 500;
     transition-duration: 0.3s;
+    font-size: 0.9rem;
+    color: var(--black2);
 }
 .goBack a:hover{
     color: var(--lgray);
+    text-decoration: underline;
 }
 
 #lblAlert{
     font-size: 0.8rem;
     text-align: center;
     width: 80%;
+}
+
+@media (max-width:400px){
+    .resetpassword-container{
+        width: 95%;
+    }
 }

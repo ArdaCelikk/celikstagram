@@ -126,3 +126,12 @@ form input[type="submit"]{
     text-align: center;
     font-size: 0.9rem;
 }
+
+@media (max-width:400px){
+    .register-container{
+        width: 350px;
+    }
+    .alreadymember{
+        width: 350px;
+    }
+}

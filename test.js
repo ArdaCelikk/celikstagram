@@ -1,0 +1,1 @@
+const testUser = require("./models").users

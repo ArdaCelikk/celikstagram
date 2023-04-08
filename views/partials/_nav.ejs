@@ -27,8 +27,8 @@
             </li>
 
             <li>
-                <a href="/" class="<%= link === 'profile' && 'link'%>">
-                    <div class="profile"><img src=<%= user.profile_photo %> alt=""></div>
+                <a href="/profile" class="<%= link === 'profile' && 'link'%>">
+                    <div class="profile"  style="background: url('<%=user.profile_photo%>');    background-size: cover; background-position: center center;"></div>
                     <div class="text">Profil</div>
                 </a>
             </li>

@@ -65,10 +65,9 @@ main{
 .circle{
     height: 70px;
     width: 70px;
+    cursor: pointer;
     border-radius: 100%;
-    background-color: black;
     border: 2px solid var(--bordercolor);
-
 }
 
 .posts{

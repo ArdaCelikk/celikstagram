@@ -10,29 +10,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING,
-        unique:true,
-        allowNull:false
+        type: Sequelize.STRING
       },
       fullname: {
-        type: Sequelize.STRING,
-        allowNull:false
+        type: Sequelize.STRING
       },
       username: {
-        type: Sequelize.STRING,
-        unique:true,
-        allowNull:false
+        type: Sequelize.STRING
       },
       password: {
-        type: Sequelize.STRING,
-        allowNull:false
+        type: Sequelize.STRING
       },
       profile_photo: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       mail_confirm: {
-        type: Sequelize.BOOLEAN,
-        allowNull:false
+        type: Sequelize.BOOLEAN
+      },
+      followers: {
+        type: Sequelize.STRING
+      },
+      following: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

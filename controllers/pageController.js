@@ -4,4 +4,10 @@ const getIndexPage = (req,res)=>{
     })
 }
 
-module.exports = {getIndexPage}
+const getProfilePage = (req,res)=>{
+    res.render("profile",{
+        link:"profile"
+    })
+}
+
+module.exports = {getIndexPage, getProfilePage}

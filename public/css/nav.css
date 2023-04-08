@@ -57,12 +57,9 @@ nav{
 }
 
 .menu ul li a .profile{
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 100%;
 }
 
 .menu ul li a .profile img{
