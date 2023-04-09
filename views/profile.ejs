@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" href="/img/logo.png" type="png">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/bottomnav.css">
     <link rel="stylesheet" href="/css/profile/style.css">
+    <link rel="stylesheet" href="/css/profile/responsive.css">
    
     <title><%= user.fullname%> (<%= user.username%>) | Celikstagram</title>
 </head>
 <body>
     <div class="container">
         <%- include("partials/_nav") %>
+        <%- include("partials/_bottomnav") %>
 
         <main>
             <div class="profileInformations">

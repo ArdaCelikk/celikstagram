@@ -1,0 +1,35 @@
+.bottomnav{
+    /* background-color: red; */
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 100000;
+    border-top: 1px solid var(--bordercolor);
+    background-color: black;
+    display: none;
+}
+
+.bottomnav ul{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.bottomnav ul li a{
+    color: var(--white);
+    font-size: 1.4rem;
+}
+
+.bottomnav ul li a .profile{
+    height: 32px;
+    width: 32px;
+    border-radius: 100%;
+}
+.bottomnav ul li a.link{
+    font-weight: 700;
+}

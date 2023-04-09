@@ -1,0 +1,107 @@
+body{
+    overflow-x: hidden;
+}
+*{
+    overflow-x: hidden;
+
+}
+@media (max-width: 1150px){
+    nav{
+        display: none;
+    }
+    .container{
+        width: 100%;
+    }
+    main{
+        width: 100%;
+        margin: 0;
+    }
+    .bottomnav{
+        display: flex;
+    }
+
+    .profileInformations{
+        width: 500px;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .posts{
+        width: 500px;
+    }
+    .profilePhoto{
+        width: 150px;
+        height: 150px;
+    }
+    .post-container.loadpost{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .user-post{
+        height: 400px;
+    }
+    .posts{
+        padding: 50px 0 ;
+    }
+}
+
+@media (max-width: 550px){
+    body{
+        overflow-x: hidden;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+    }
+    main{
+        width: 100%;
+    }
+    .posts{
+        width: 100%;
+        min-width: 300px;
+        padding: 50px 0 ;
+    }
+    .post-container.loadpost{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .user-post{
+        height: 300px;
+    }
+    .posts .choice{
+        display: none;
+    }
+}
+
+@media (max-width:850px){
+    .uploadPhotoContainer .closer{
+        height: auto;
+    }
+    .uploadPhotoBox{
+        width: 80%;
+        height: 60%;
+        min-width: 350px;
+        min-height: 350px;
+    }
+    .uploadPhotoBox .main{
+        height: 100%;
+    }
+}
+
+@media (max-height:500px){
+    .uploadPhotoBox{
+        width: auto;
+        height: auto;
+        min-height: 0;
+        min-width: 0;
+    }
+    .uploadPhotoBox .main{
+        height: auto;
+        justify-self: center;
+        align-self: center;
+        padding: 50px;
+    }
+    .uploadPhotoBox .main svg{
+        display: none;
+    }
+    .uploadPhotoBox .main span{
+        display: none;
+    }
+}
