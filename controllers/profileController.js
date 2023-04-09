@@ -6,17 +6,21 @@ const User = require("../models").users
 
 
 const getProfilePage = async (req,res)=>{
-  try {
-    let posts = await Posts.findAll({where:{user: res.locals.user.id}}) 
-    res.render("profile",{
-    link:"profile",
-    posts,
-  })
-  } catch (error) {
-    res.status(400).json({
-      message: "no post"
-    })
-  }
+    const posts = await Posts.findAll({where:{user_id: res.locals.user.id}}) 
+    if(posts)
+    {
+      res.render("profile",{
+        link:"profile",
+        posts,
+        
+      })
+    }else{
+      res.render("profile",{
+        link:"profile",
+        posts:false
+      })
+    }
+    
 }
 
 const uploadPosts = async  (req,res)=>{
@@ -37,7 +41,7 @@ const uploadPosts = async  (req,res)=>{
       // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
       let newPath =  req.file.path.split('\\').splice(1, 3)
       let sharePost = await  Posts.create({
-        user: res.locals.user.id,
+        user_id: res.locals.user.id,
         username: res.locals.user.username,
         profile_photo: res.locals.user.profile_photo,
         url: "/"+newPath.join("/"),
@@ -81,8 +85,26 @@ const changeProfilePhoto = async (req,res)=>{
   }
 }
 
+const showOwnPosts = async (req,res)=>{
+  try {
+    let posts = await Posts.findAll({where:{user: res.locals.user.id}})
+    if(posts){
+      res.render("ownposts",{
+        link: "profile",
+        posts
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      succeded: false,
+      msg: error.message
+    })
+  }
+}
+
 module.exports = {
     getProfilePage,
     uploadPosts,
-    changeProfilePhoto
+    changeProfilePhoto,
+    showOwnPosts
 }

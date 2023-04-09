@@ -1,8 +1,13 @@
 const Posts = require("../models").posts
+const User = require("../models").users
 
 const getIndexPage =async (req,res)=>{
-    const posts = await Posts.findAll()
-    // console.log(posts);
+    const posts = await Posts.findAll({
+        include: [{
+          model: User,
+        }]
+      })
+
     res.render("index",{
         link:"index",
         posts

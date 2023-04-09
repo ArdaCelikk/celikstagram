@@ -1,3 +1,4 @@
+
 'use strict';
 const {
   Model
@@ -11,12 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.users, { foreignKey: 'user_id'});
     }
   }
   posts.init({
-    user: DataTypes.INTEGER,
-    username: DataTypes.STRING,
-    profile_photo: DataTypes.STRING,
+    user_id: {
+      type:DataTypes.INTEGER,
+    },
     url: DataTypes.STRING,
     description: DataTypes.STRING,
     likes: {

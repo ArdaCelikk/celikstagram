@@ -29,3 +29,10 @@ app.use("/accounts",accountsRoute)
 app.listen(port,()=>{
     console.log("Server Started On This Port: "+ port);
 })
+
+
+
+
+
+
+

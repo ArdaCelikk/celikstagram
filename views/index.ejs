@@ -26,9 +26,9 @@
                         for(post of posts){ %>
                         <div class="post">
                             <div class="header">
-                                <div class="profile_photo"  style="background: url('<%=post.profile_photo%>');    background-size: cover; background-position: center center;">
+                                <div class="profile_photo"  style="background: url('<%=post.user.profile_photo%>');    background-size: cover; background-position: center center;">
                                 </div>
-                                <div class="username"><%=post.username%></div>
+                                <div class="username"><%=post.user.username%></div>
                             </div>
                             <div class="main" style="background: url('<%=post.url%>');background-size: cover;background-repeat: no-repeat;background-position: center center;">
                             </div>

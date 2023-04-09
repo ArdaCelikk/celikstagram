@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" href="/img/logo.png" type="png">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/posts/style.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <title><%= user.fullname%> (<%= user.username%>) | Celikstagram</title>
+</head>
+<body>
+    <div class="container">
+        <%- include("partials/_nav") %>
+        <main>
+            <div class="contents">
+
+                <div class="posts">
+
+                    <%
+                        for(post of posts){ %>
+                        <div class="post">
+                            <div class="header">
+                                <div class="profile_photo"  style="background: url('<%=user.profile_photo%>');    background-size: cover; background-position: center center;">
+                                </div>
+                                <div class="username"><%=post.username%></div>
+                            </div>
+                            <div class="main" style="background: url('<%=post.url%>');background-size: cover;background-repeat: no-repeat;background-position: center center;">
+                            </div>
+                        
+                            <div class="footer">
+                                <div class="like">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                    <span><%=JSON.parse(post.likes).length%></span>
+                                </div>
+                                <ion-icon name="bookmark-outline"></ion-icon>
+                            </div>
+                            <div class="comment">
+                                <%=post.description%>
+                            </div>
+                        </div>
+                    <%}%>
+
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
