@@ -26,7 +26,7 @@ const getProfilePage = async (req,res)=>{
 const uploadPosts = async  (req,res)=>{
     try {
       // Dosya yükleme ayarları
-      const storage = multer.diskStorage({
+      const storage = await  multer.diskStorage({
         destination: function (req, file, cb) {
           cb(null, 'public/uploads/')
         },
@@ -35,11 +35,11 @@ const uploadPosts = async  (req,res)=>{
         }
       });
 
-      const upload = multer({ storage: storage });
+      const upload = await multer({ storage: storage });
 
-      upload.single('file') (req, res, async (err)  => {
+      await upload.single('file') (req, res, async (err)  => {
       // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
-      let newPath =  req.file.path.split('\\').splice(1, 3)
+      let newPath = await req.file.path.split('\\').splice(1, 3)
       let sharePost = await  Posts.create({
         user_id: res.locals.user.id,
         username: res.locals.user.username,
@@ -47,7 +47,12 @@ const uploadPosts = async  (req,res)=>{
         url: "/"+newPath.join("/"),
         description: req.body.description,
       })
-      });
+      })
+
+      res.status(200).json({
+        succeded:true
+      })
+      
     } catch (error) {
       res.status(500).json({
         succeded:false,
@@ -68,6 +73,7 @@ const changeProfilePhoto = async (req,res)=>{
     });
     const upload = await multer({ storage: storage });
     await upload.single('profile_photo') (req, res, async (err)  => {
+
       if(err) console.log(err);
       // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
       const newPath = await req.file.path.split('\\').splice(1, 3).join("/");
@@ -75,6 +81,10 @@ const changeProfilePhoto = async (req,res)=>{
         {profile_photo: "/"+newPath},
         {where:{id: res.locals.user.id}}
       )
+    })
+
+    res.status(200).json({
+      succeded:true
     })
       
   } catch (error) {

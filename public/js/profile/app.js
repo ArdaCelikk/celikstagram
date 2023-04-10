@@ -18,13 +18,17 @@ fileInput.addEventListener('change', async () => {
     submit.value = "Paylaş"
     main.appendChild(submit)
     submit.addEventListener("click", async ()=>{
-        formData.append('description', textArea.value);
-        fetch('/profile/uploadphoto', {
-          method: 'POST',
-          body: formData
-        }).then(setTimeout(() => {
-            window.location.href = "/profile"
-        }, 200))
+    formData.append('description', textArea.value);
+    const request = await fetch('/profile/uploadphoto', {
+        method: 'POST',
+        body: formData
+    })
+    const response = await request.json();
+    console.log(response);
+
+    if(response.succeded){
+        window.location.href = "/profile"
+    }
   })
 });
 
@@ -51,12 +55,15 @@ profilephoto.addEventListener("change", async ()=>{
     const profilephotoFile = profilephoto.files[0];
     const formData2 = new FormData();
     formData2.append('profile_photo', profilephotoFile);
-    fetch('/profile/changeprofilephoto', {
+    let request = await fetch('/profile/changeprofilephoto', {
         method: 'POST',
         body: formData2
-    }).then(setTimeout(() => {
+    })
+    let response = await request.json()
+    if(response.succeded){
+        console.log(response);
         window.location.href = "/profile"
-    }, 200))
+    }
     
 
 })
