@@ -2,6 +2,8 @@ const fileInput = document.getElementById('file-uploadphoto');
 const imgUploaded = document.getElementById("imgUploaded")
 let main = document.querySelector(".main")
 
+var clickCount = 0
+
 // FOTOĞRAF PAYLAŞMAK
 fileInput.addEventListener('change', async () => {
     const file = fileInput.files[0];
@@ -17,19 +19,23 @@ fileInput.addEventListener('change', async () => {
     submit.type = "submit"
     submit.value = "Paylaş"
     main.appendChild(submit)
-    submit.addEventListener("click", async ()=>{
-    formData.append('description', textArea.value);
-    const request = await fetch('/profile/uploadphoto', {
-        method: 'POST',
-        body: formData
-    })
-    const response = await request.json();
-    console.log(response);
-
-    if(response.succeded){
-        window.location.href = "/profile"
+    if(clickCount === 0)
+    {
+        ++clickCount
+        submit.addEventListener("click", async ()=>{
+            formData.append('description', textArea.value);
+            const request = await fetch('/profile/uploadphoto', {
+                method: 'POST',
+                body: formData
+            })
+            const response = await request.json();
+            console.log(response);
+        
+            if(response.succeded){
+                window.location.href = "/profile"
+            }
+          })
     }
-  })
 });
 
 
