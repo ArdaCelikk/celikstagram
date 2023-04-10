@@ -10,7 +10,9 @@ fileInput.addEventListener('change', async () => {
     const formData = new FormData();
     formData.append('file', file);
 
-    main.innerHTML = ""
+    main.children[0].style.display = "none"
+    main.children[1].style.display = "none"
+    main.children[2].style.display = "none"
     let textArea = document.createElement("textarea")
     textArea.placeholder = "Açıklama Yaz..."
     main.appendChild(textArea)
@@ -19,10 +21,18 @@ fileInput.addEventListener('change', async () => {
     submit.type = "submit"
     submit.value = "Paylaş"
     main.appendChild(submit)
+    const loadingRing = document.getElementById("loadingRing")
     if(clickCount === 0)
     {
         ++clickCount
         submit.addEventListener("click", async ()=>{
+            textArea.style.display = "none"
+            submit.style.display = "none"
+            loadingRing.style.display = "inline-block"
+            let pleaseWaitText = document.createElement("div")
+            pleaseWaitText.textContent = "Lütfen Bekleyiniz"
+            pleaseWaitText.className = "pleaseWaitText"
+            main.appendChild(pleaseWaitText)
             formData.append('description', textArea.value);
             const request = await fetch('/profile/uploadphoto', {
                 method: 'POST',
