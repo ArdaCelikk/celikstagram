@@ -66,8 +66,16 @@ btnSharePhoto.addEventListener("click",()=>{
 
 
 let profilephoto = document.getElementById("file-profilephoto")
-
+let profilePhotoBox = document.getElementById("profilePhotoBox")
+let loadingRing2 = document.getElementById("loadingRing2")
 profilephoto.addEventListener("change", async ()=>{
+    profilePhotoBox.children[0].style.display = "none"
+    profilePhotoBox.children[1].style.display = "none"
+    profilePhotoBox.style.display= "flex"
+    profilePhotoBox.style.justifyContent= "center"
+    profilePhotoBox.style.alignItems= "center"
+    profilePhotoBox.style.background= "transparent"
+    loadingRing2.style.display = "inline-block"
     const profilephotoFile = profilephoto.files[0];
     const formData2 = new FormData();
     formData2.append('profile_photo', profilephotoFile);
