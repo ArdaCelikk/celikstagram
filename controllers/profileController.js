@@ -39,14 +39,16 @@ const uploadPosts = async  (req,res)=>{
 
       await upload.single('file') (req, res, async (err)  => {
       // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
-      let newPath = await req.file.path.split('\\').splice(1, 3)
-      let sharePost = await  Posts.create({
-        user_id: res.locals.user.id,
-        username: res.locals.user.username,
-        profile_photo: res.locals.user.profile_photo,
-        url: "/"+newPath.join("/"),
-        description: req.body.description,
-      })
+      if(req.file.path){
+        let newPath = await req.file.path.split('\\').splice(1, 3)
+        let sharePost = await  Posts.create({
+          user_id: res.locals.user.id,
+          username: res.locals.user.username,
+          profile_photo: res.locals.user.profile_photo,
+          url: "/"+newPath.join("/"),
+          description: req.body.description,
+        })
+      }
       })
 
       res.status(200).json({
