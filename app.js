@@ -6,6 +6,7 @@ const middlewares= require("./middlewares/authmiddleware")
 const pageRoute = require("./routes/pageRoutes")
 const profileRoute = require("./routes/profileRoutes")
 const accountsRoute = require("./routes/accountsRoutes")
+const postsRoute = require("./routes/postsRoute")
 const app = express()
 
 
@@ -25,6 +26,7 @@ app.use("*",middlewares.checkUser)
 app.use("/",pageRoute)
 app.use("/profile",profileRoute)
 app.use("/accounts",accountsRoute)
+app.use("/posts",postsRoute)
 
 app.listen(port,()=>{
     console.log("Server Started On This Port: "+ port);

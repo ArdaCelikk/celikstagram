@@ -24,7 +24,7 @@ form.addEventListener("submit",()=>{
             }else{
                 lblFormAlert.textContent = value.message;
                 lblFormAlert.style.color= "green"
-                
+                window.location.href = "/"
             }
         })
     } catch (error) {

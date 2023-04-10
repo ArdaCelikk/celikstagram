@@ -38,8 +38,9 @@
                         
                             <div class="footer">
                                 <div class="like">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                    <span>0</span>
+                                    <ion-icon name="heart-outline" <% if(JSON.parse(post.likes).includes(user.id)){ %> style="color:crimson" <%}%>  class="btnLike"></ion-icon>
+                                    <span><%= JSON.parse(post.likes).length%></span>
+                                    <span id="postID"><%=post.id%></span>
                                 </div>
                                 <ion-icon name="bookmark-outline"></ion-icon>
                             </div>
@@ -57,5 +58,6 @@
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/js/index/app.js"></script>
 </body>
 </html>

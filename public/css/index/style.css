@@ -78,5 +78,10 @@ main{
     gap: 50px;
 }
 
+#postID{
+    display: none;
+    z-index: -10000000;
+}
+
 
 
