@@ -42,7 +42,9 @@ fileInput.addEventListener('change', async () => {
             console.log(response);
         
             if(response.succeded){
-                window.location.href = "/profile"
+                setTimeout(() => {
+                    window.location.href = "/profile" 
+                }, 200);
             }
           })
     }
@@ -85,8 +87,10 @@ profilephoto.addEventListener("change", async ()=>{
     })
     let response = await request.json()
     if(response.succeded){
-        console.log(response);
-        window.location.href = "/profile"
+        
+        setTimeout(() => {
+            window.location.href = "/profile" 
+        }, 200);
     }
     
 

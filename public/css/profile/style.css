@@ -11,6 +11,9 @@
     box-sizing: border-box;
     font-family: Inter;
 }
+body{
+    background: black;
+}
 
 :root{
     --white:#fff;

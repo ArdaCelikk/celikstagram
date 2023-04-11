@@ -25,35 +25,40 @@ const getProfilePage = async (req,res)=>{
 
 const uploadPosts = async  (req,res)=>{
     try {
-      // Dosya yükleme ayarları
-      const storage = await  multer.diskStorage({
-        destination: function (req, file, cb) {
-          cb(null, 'public/uploads/')
-        },
-        filename: function (req, file, cb) {
-          cb(null, Date.now() + '-' + file.originalname)
+          // Dosya yükleme ayarları
+        const storage = await  multer.diskStorage({
+          destination: function (req, file, cb) {
+            if(file){
+              cb(null, 'public/uploads/')
+            }
+          },
+          filename: function (req, file, cb) {
+            if(file){
+              cb(null, Date.now() + '-' + file.originalname)
+            }
+          }
+        });
+
+        const upload = await multer({ storage: storage });
+
+        await upload.single('file') (req, res, async (err)  => {
+        // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
+        if(req.file.path){
+          let newPath = await req.file.path.split('\\').splice(1, 3)
+          let sharePost = await  Posts.create({
+            user_id: res.locals.user.id,
+            username: res.locals.user.username,
+            profile_photo: res.locals.user.profile_photo,
+            url: "/"+newPath.join("/"),
+            description: req.body.description,
+          })
         }
-      });
-
-      const upload = await multer({ storage: storage });
-
-      await upload.single('file') (req, res, async (err)  => {
-      // Yükleme işlemi tamamlandıktan sonra burada yapılacak işlemler
-      if(req.file.path){
-        let newPath = await req.file.path.split('\\').splice(1, 3)
-        let sharePost = await  Posts.create({
-          user_id: res.locals.user.id,
-          username: res.locals.user.username,
-          profile_photo: res.locals.user.profile_photo,
-          url: "/"+newPath.join("/"),
-          description: req.body.description,
         })
-      }
-      })
 
-      res.status(200).json({
-        succeded:true
-      })
+        res.status(200).json({
+          succeded:true
+        })
+      
       
     } catch (error) {
       res.status(500).json({
