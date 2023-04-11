@@ -39,7 +39,6 @@ fileInput.addEventListener('change', async () => {
                 body: formData
             })
             const response = await request.json();
-            console.log(response);
         
             if(response.succeded){
                 setTimeout(() => {
