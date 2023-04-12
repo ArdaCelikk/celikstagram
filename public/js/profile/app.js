@@ -53,6 +53,7 @@ fileInput.addEventListener('change', async () => {
 let sharePostCloser = document.getElementById("sharePostCloser")
 let uploadPhotoContainer = document.querySelector(".uploadPhotoContainer")
 let btnSharePhoto = document.querySelector(".btnSharePhoto")
+let shareFirstPhoto= document.getElementById("shareFirstPhoto")
 
 
 sharePostCloser.addEventListener("click",()=>{
@@ -60,6 +61,10 @@ sharePostCloser.addEventListener("click",()=>{
 })
 
 btnSharePhoto.addEventListener("click",()=>{
+    uploadPhotoContainer.style.display = "flex"
+})
+
+shareFirstPhoto.addEventListener("click",()=>{
     uploadPhotoContainer.style.display = "flex"
 })
 
@@ -106,3 +111,14 @@ profilePhoto.addEventListener("click",()=>{
 changeProfileCloser.addEventListener("click",()=>{
     ppChange_container.style.display = "none"
 })
+
+async function  followuser(user)  {
+    const request= await  fetch("/profile/follow",
+        {
+            method:"POST",
+            body:JSON.stringify({user_ID:user})
+        },
+    )
+    const response = await  request.json()
+    console.log(response);
+}

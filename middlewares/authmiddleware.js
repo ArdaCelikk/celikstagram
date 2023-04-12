@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken")
 const User = require("../models").users
 
 const checkUser = async (req, res, next) => {
+try {
   const token = req.cookies.jwt;
 
   if (token) {
@@ -27,6 +28,12 @@ const checkUser = async (req, res, next) => {
     res.locals.user = null;
     next();
   }
+} catch (error) {
+  res.cookie("jwt", "", {
+    maxAge: 1
+  });
+  res.redirect("/")
+}
 };
 
 const authenticateToken = async (req, res, next) => {

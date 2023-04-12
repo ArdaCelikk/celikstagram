@@ -31,7 +31,7 @@
                             <div class="header">
                                 <div class="profile_photo"  style="background: url('<%=post.user.profile_photo%>');    background-size: cover; background-position: center center;">
                                 </div>
-                                <div class="username"><%=post.user.username%></div>
+                                <div class="username"><a href="/profile/<%=post.user.username%>" style="color:white"><%=post.user.username%></a></div>
                             </div>
                             <div class="main" style="background: url('<%=post.url%>');background-size: cover;background-repeat: no-repeat;background-position: center center;">
                             </div>

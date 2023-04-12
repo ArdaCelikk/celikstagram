@@ -119,9 +119,103 @@ const showOwnPosts = async (req,res)=>{
   }
 }
 
+
+const getOtherUserProfile = async (req,res)=>{
+  try {
+    const paramsUser =await  User.findOne({where:{username:req.params.username}})
+    if(req.params.username == res.locals.user.username){
+      res.redirect("/profile")
+    }else if(!paramsUser.username){
+      res.redirect("/")
+
+    }else{
+      
+    if(paramsUser){
+        const posts = await Posts.findAll(
+        {
+            include: [{
+              model: User,
+            }],
+            where:{user_id: paramsUser.id}
+        })
+        
+
+        // res.send(posts[0].user)
+        if(posts){
+          res.render("profiles",{
+            posts,
+            link:"index"
+          })
+        }else{
+          res.render("profiles",{
+            posts:false,
+            link: "index"
+          })
+        }
+      }else{
+        res.redirect("/")
+      }
+    }
+    
+  } catch (error) {
+    res.status(500).json({
+      succeded:false,
+      msg: error.message
+    })
+  }
+}
+
+const followUser = async (req,res)=>{
+  try {
+    console.log(req.body);
+    let user = await User.findAll({where:{username:req.body.user_ID}})
+    if(user){
+      const followers = await JSON.parse(user.followers)
+      if(followers.includes(res.locals.user.id)){
+        const takeIndex = await followers.indexOf(res.locals.user.id)
+        if(takeIndex !== -1){
+            followers.splice(takeIndex, 1)
+            let extractUser = await User.update(
+                {followers: JSON.stringify(followers)},
+                {where: {id:user.id }}
+            )
+            if(extractUser){
+                res.status(200).json({
+                    succeded: true,
+                    follow: false
+                })
+            }
+        }
+      }else if(!followers.includes(res.locals.user.id)){
+        followers.push(res.locals.id)
+        const followed = await User.update({followers},{where:{id:user.id}})
+        if(followed){
+          res.status(200).json({
+            succeded:true,
+            like: true
+          })
+        }
+      }else{
+        res.status(500).json({
+          succeded:false,
+          msg: "Something Going Wrong!!"
+        })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      succeded:false,
+      msg: error.message
+    })
+  }
+}
+
 module.exports = {
     getProfilePage,
     uploadPosts,
     changeProfilePhoto,
-    showOwnPosts
+    showOwnPosts,
+    getOtherUserProfile,
+    followUser
 }
