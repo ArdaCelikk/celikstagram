@@ -125,12 +125,8 @@ const getOtherUserProfile = async (req,res)=>{
     const paramsUser =await  User.findOne({where:{username:req.params.username}})
     if(req.params.username == res.locals.user.username){
       res.redirect("/profile")
-    }else if(!paramsUser.username){
-      res.redirect("/")
-
-    }else{
-      
-    if(paramsUser){
+    }else if(paramsUser){
+      if(paramsUser){
         const posts = await Posts.findAll(
         {
             include: [{
@@ -155,6 +151,8 @@ const getOtherUserProfile = async (req,res)=>{
       }else{
         res.redirect("/")
       }
+    }else if(!paramsUser){
+      res.redirect("/")
     }
     
   } catch (error) {
@@ -167,41 +165,76 @@ const getOtherUserProfile = async (req,res)=>{
 
 const followUser = async (req,res)=>{
   try {
-    console.log(req.body);
-    let user = await User.findAll({where:{username:req.body.user_ID}})
-    if(user){
-      const followers = await JSON.parse(user.followers)
+    const followingUser = await User.findOne({where:{id:req.body.user_ID}})
+    if(followingUser){
+      const followers = await JSON.parse(followingUser.followers)
       if(followers.includes(res.locals.user.id)){
-        const takeIndex = await followers.indexOf(res.locals.user.id)
-        if(takeIndex !== -1){
-            followers.splice(takeIndex, 1)
-            let extractUser = await User.update(
-                {followers: JSON.stringify(followers)},
-                {where: {id:user.id }}
-            )
-            if(extractUser){
-                res.status(200).json({
-                    succeded: true,
-                    follow: false
-                })
+        const index  = followers.indexOf(res.locals.user.id)
+        if (index !== -1) { // eğer eleman dizide bulunursa
+          followers.splice(index, 1); // diziden elemanı siler
+        }
+        const unFollow = await User.update(
+          {followers: JSON.stringify(followers)},
+          {where:{id:req.body.user_ID}}
+        )
+
+        if(unFollow){
+          if(res.locals.user.following.includes(req.body.user_ID)){
+            const following = res.locals.user.following
+            const index  = following.indexOf(req.body.user_ID)
+            if (index !== -1) { // eğer eleman dizide bulunursa
+              following.splice(index, 1); // diziden elemanı siler
             }
+            const deleteFollowing = await User.update(
+              {following:JSON.stringify(following)},
+              {where:{id:res.locals.user.id}}
+            )
+            if(deleteFollowing){
+              res.status(200).json({
+                succeded:true,
+                followed:false
+              })
+            }
+          }
         }
+
       }else if(!followers.includes(res.locals.user.id)){
-        followers.push(res.locals.id)
-        const followed = await User.update({followers},{where:{id:user.id}})
-        if(followed){
-          res.status(200).json({
-            succeded:true,
-            like: true
-          })
+        followers.push(res.locals.user.id)
+        const addFollow = await User.update(
+          {followers: JSON.stringify(followers)},
+          {where:{id:req.body.user_ID}}
+          )
+
+        if(addFollow){
+          if(res.locals.user){
+            if(res.locals.user.following.includes(req.body.user_ID)){
+
+            }else{
+              const following = res.locals.user.following
+              following.push(req.body.user_ID)
+              const addFollowing = await User.update(
+                {following: JSON.stringify(following)},
+                {where:{id:res.locals.user.id}}
+              )
+
+              if(addFollowing){
+                res.status(200).json({
+                  succeded:true,
+                  followed:true
+                })
+              }
+            }
+          }
         }
-      }else{
-        res.status(500).json({
-          succeded:false,
-          msg: "Something Going Wrong!!"
-        })
       }
+
+    }else{
+      res.status(500).json({
+        succeded:false,
+        msg:"User Not Found!!"
+      })
     }
+
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -209,6 +242,7 @@ const followUser = async (req,res)=>{
       msg: error.message
     })
   }
+
 }
 
 module.exports = {

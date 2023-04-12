@@ -104,6 +104,7 @@ profilephoto.addEventListener("change", async ()=>{
 let profilePhoto = document.querySelector(".profilePhoto")
 let ppChange_container = document.querySelector(".ppChange-container")
 let changeProfileCloser = document.getElementById("changeProfileCloser")
+var btnFollowUserText = document.getElementById("btnFollowUserText")
 profilePhoto.addEventListener("click",()=>{
     ppChange_container.style.display = "flex"
 })
@@ -113,12 +114,16 @@ changeProfileCloser.addEventListener("click",()=>{
 })
 
 async function  followuser(user)  {
-    const request= await  fetch("/profile/follow",
-        {
-            method:"POST",
-            body:JSON.stringify({user_ID:user})
-        },
-    )
+    const request = await fetch("/profile/follow", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({user_ID:user}),
+    });
     const response = await  request.json()
-    console.log(response);
+    console.log(this);
+    if(response.succeded){
+        window.location.reload()
+    }
 }

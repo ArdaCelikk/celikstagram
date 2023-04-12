@@ -29,11 +29,11 @@
                     </div>
                     <div class="follow">
                         <span><span class="number"><%if(posts) {%><%=posts.length%><%} else {%>0<%}%></span> Gönderi</span>
-                        <span><span class="number"><%=user.followers.length%></span> Takipçi</span>
-                        <span><span class="number"><%=user.following.length%></span> Takip</span>
+                        <span><span class="number"><%= user.followers.length%></span> Takipçi</span>
+                        <span><span class="number"><%= user.following.length %></span> Takip</span>
                     </div>
                     <div class="addPhoto">
-                        <button class="btnFollowUser" onclick="followuser('<%=posts[0].user.id%>')">Takip Et</button>
+                        <button onclick="followuser('<%=posts[0].user.id%>')" class="btnFollowUser"><%if(user.following.includes(JSON.stringify(posts[0].user.id))) {%>Takipten Çık <%}else{%> Takip Et <%}%> </button>
                     </div>
                 </div>
             </div>
