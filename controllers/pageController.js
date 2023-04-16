@@ -5,7 +5,8 @@ const getIndexPage =async (req,res)=>{
     const posts = await Posts.findAll({
         include: [{
           model: User,
-        }]
+        }],
+        order: Posts.sequelize.literal('RAND()')
       })
 
     res.render("index",{

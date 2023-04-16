@@ -140,11 +140,13 @@ const getOtherUserProfile = async (req,res)=>{
         if(posts){
           res.render("profiles",{
             posts,
+            paramsUser,
             link:"index"
           })
         }else{
           res.render("profiles",{
             posts:false,
+            paramsUser,
             link: "index"
           })
         }
